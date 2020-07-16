@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+  
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    
+    <style>
+      .gm-style img {
+          max-width: none;
+          display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="pano"></div>
+
+    
+    <script src="./hybrid.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKf4vdhuBiiZaJrHs3IVqRUSdwqQPnl4&callback=initMap"></script>
+  </body>
+</html>

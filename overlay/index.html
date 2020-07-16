@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mapbox Google Overlay</title>
+  <style>
+    #map {
+      width: 90%;
+      height: 600px;
+      margin: 20px 0px;
+    }
+
+    #info {
+      max-height: 400px;
+      overflow: auto;
+      white-space: pre;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="settings">
+    <h3>Mapbox Google Overlay</h3>
+
+    <section>
+      <h4>Google map with Mapbox vector tile overlay</h4>
+      <div id="map">Map</div>
+    </section>
+
+    <section>
+      <h4>Mousemove event data</h4>
+      <div id="info"></div>
+    </section>
+
+    <script>
+        const module = {};
+      </script>
+      <script src='mapbox-gl.js'></script>
+      <script>
+        const mapboxgl = module.exports;
+      </script>
+      <script src="defaults.js"></script>
+      <script src="mapbox_google_overlay.js"></script>
+      <script src="google.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCBbns1owPCeUoVcg55j3WEb3Km1DQZ7w&callback=initMap">
+    </script>
+
+</body>
+
+</html>
