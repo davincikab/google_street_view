@@ -34,7 +34,8 @@ map.on('load', function(e){
     content.innerHTML = '<img src="person.svg" alt="">';
     marker = new mapboxgl.Marker({
       element:content,
-      draggable: true
+      draggable: true,
+      rotation:270
       })
       .setLngLat(map.getCenter())
       .addTo(map);
@@ -68,6 +69,13 @@ function initMap() {
   
     panorama.addListener("pano_changed", function() {
       // do something
+      var pov = panorama.getPov();
+
+      console.log(pov);
+      if(marker) {
+        marker.setRotation(pov.heading);
+      }
+      
     });
   
      
