@@ -97,7 +97,21 @@ function initMap() {
     panorama.addListener("position_changed", function() {
       let position  = panorama.getPosition().toJSON();
       var markerPosition;
+
+      if(!marker) {
+        return;
+      } else {
+        markerPosition = marker.getLngLat();
+      }
+
+       // compare the position of the two
+      if(position.lat == markerPosition.lat && position.lng == markerPosition.lng){
+        return;
+      } else {
+        marker.setLngLat(position);
+      }
     });
+
 
   }
 
