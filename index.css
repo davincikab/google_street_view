@@ -11,3 +11,11 @@ body {
   height: 100%;
   width: 50%;
 }
+
+.road {
+  width: 15px;
+  height:2px;
+  margin-right: 1em;
+  border:1px solid;
+  border-color: red;
+}

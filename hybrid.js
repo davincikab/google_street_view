@@ -8,7 +8,7 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/daudi97/ckcouhqzd0l1f1io3zw42a9s7', // stylesheet location
     center: [-117.15897, 32.719356], // starting position [lng, lat]
-    zoom: 15,// starting zoom
+    zoom: 10,// starting zoom
     hash:true
 });
 
@@ -33,6 +33,7 @@ map.on('load', function(e){
         }
     });
 
+    
     content.innerHTML = '<img src="north.svg" alt="" id="pegman">';
     marker = new mapboxgl.Marker({
       element:content,
@@ -54,8 +55,51 @@ map.on('load', function(e){
         // update the panorama view
         panorama.setPosition(lngLat);
       }
-});
 
+
+      // geocoder
+      function forwardGeocoder(query) {
+          var matchingFeatures = [];
+          map.setZoom(10);
+
+          var customData =  map.queryRenderedFeatures(
+            { layers: ['roads'] }
+          );
+
+          for (var i = 0; i < customData.length; i++) {
+            var feature = customData[i];
+            console.log(feature);
+            // handle queries with different capitalization than the source data by calling toLowerCase()
+            if (
+            feature.properties.OID.toString()
+            .toLowerCase()
+            .search(query.toLowerCase()) !== -1
+            ) {
+              // add a tree emoji as a prefix for custom data results
+              // using carmen geojson format: https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
+              feature['place_name'] = feature.properties.OID+ ' ' + feature.properties.SL;
+
+              var fc = turf.featureCollection([feature]);
+              var center = turf.center(fc);
+
+              feature['center'] = center.geometry.coordinates;
+              feature['place_type'] = ['street'];
+              matchingFeatures.push(feature);
+            }
+          }
+          return matchingFeatures;
+        }
+         
+        map.addControl(
+          new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          localGeocoder: forwardGeocoder,
+          zoom: 14,
+          placeholder: 'Enter search e.g. 326',
+          mapboxgl: mapboxgl
+          })
+        );
+});
 
 
 function initMap() {
